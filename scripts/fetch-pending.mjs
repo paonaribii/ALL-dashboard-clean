@@ -2,8 +2,10 @@
 // "อนุมัติแล้วแล้วยังไม่เกิดสัญญา สาขาติดตามเปิดสัญญาให้จบ". Each stage has its own tab; tabs are found by
 // name (so reordering or renumbering them is fine) and the Zone tab supplies branch names.
 // Customer names / phone numbers in the sheet are never written out.
-// If the download fails (offline, sheet unshared) the existing file is kept so the build still works.
+// Read through the Sheets API with the service account (scripts/google-sheets.mjs), so the sheet can stay restricted.
+// If the download fails (offline, sheet not shared with the service account) the existing file is kept so the build still works.
 import {writeFile} from 'node:fs/promises';
+import {listTabs, readTab} from './google-sheets.mjs';
 
 // Sheet id comes from .env (SHEET_PENDING_ID); it is not kept in the repo.
 const SHEET_ID = process.env.SHEET_PENDING_ID;
@@ -22,41 +24,17 @@ const BRANDS = [['IPHONE', 'Apple'], ['IPAD', 'Apple'], ['MACBOOK', 'Apple'], ['
   ['INFINIX', 'Infinix'], ['ZTE', 'ZTE'], ['NOTHING', 'NOTHING'], ['IQOO', 'iQOO']];
 const UNKNOWN = 'ไม่ระบุ';
 
-function parseCsv(text) {
-  const rows = [];
-  let row = [], cell = '', quoted = false;
-  for (let i = 0; i < text.length; i++) {
-    const ch = text[i];
-    if (quoted) {
-      if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
-      else if (ch === '"') quoted = false;
-      else cell += ch;
-    } else if (ch === '"') quoted = true;
-    else if (ch === ',') { row.push(cell); cell = ''; }
-    else if (ch === '\n') { row.push(cell.replace(/\r$/, '')); rows.push(row); row = []; cell = ''; }
-    else cell += ch;
-  }
-  if (cell || row.length) { row.push(cell); rows.push(row); }
-  return rows;
-}
-async function fetchText(url) {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
-  return res.text();
-}
-const tabCsv = async gid => parseCsv(await fetchText(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`));
 const brandOf = model => BRANDS.find(([kw]) => String(model || '').toUpperCase().includes(kw))?.[1] || UNKNOWN;
 const brandGroupOf = brand => brand === 'Apple' ? 'Apple' : ['ASUS', 'HP', 'LENOVO'].includes(brand) ? 'Notebook' : brand === UNKNOWN ? UNKNOWN : 'Smartphone';
 
 try {
   if (!SHEET_ID) throw new Error('SHEET_PENDING_ID is not set in .env');
-  const html = await fetchText(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/htmlview`);
-  const tabs = [...html.matchAll(/\{name: "([^"]+)", pageUrl: "[^"]*?gid=(\d+)/g)].map(m => ({name: JSON.parse(`"${m[1]}"`), gid: m[2]}));
+  const tabs = await listTabs(SHEET_ID);
   if (!tabs.length) throw new Error('could not list the sheet tabs');
 
   const zoneTab = tabs.find(t => t.name.trim().toLowerCase() === 'zone');
   const branchName = new Map();
-  if (zoneTab) for (const r of (await tabCsv(zoneTab.gid)).slice(1)) if (r[0]?.trim()) branchName.set(r[0].trim(), r[1]?.trim());
+  if (zoneTab) for (const r of (await readTab(SHEET_ID, zoneTab.name)).slice(1)) if (r[0]?.trim()) branchName.set(r[0].trim(), r[1]?.trim());
 
   const groups = new Map(), seen = new Set(), stageInfo = new Map(), skipped = [];
   for (const tab of tabs) {
@@ -65,7 +43,7 @@ try {
     const [, stage, reason] = spec;
     const info = stageInfo.get(stage) || {stage, gid: tab.gid, count: 0, months: []};
     stageInfo.set(stage, info);
-    for (const r of await tabCsv(tab.gid)) {
+    for (const r of await readTab(SHEET_ID, tab.name)) {
       const app = String(r[2] || '').trim();
       if (!app || app === 'เลขที่ใบคำขอ') continue;
       const m = String(r[5] || '').match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/);

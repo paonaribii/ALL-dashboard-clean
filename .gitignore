@@ -2,6 +2,8 @@
 .env
 .env.*
 !.env.example
+credentials/
+service_account*.json
 
 # --- Data (PDPA): contract-level database, dashboard payloads, sheet extracts, page snapshots ---
 # Everything under data/ is built locally from the raw contract exports; none of it goes to git.

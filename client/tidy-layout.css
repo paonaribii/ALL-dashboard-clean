@@ -55,3 +55,5 @@ body.dark .bg-level-title{color:#cbd5e1}
 .bg-total-meta .delta.up{background:rgba(34,197,94,.25);color:#dcfce7}
 .bg-total-meta .delta.down{background:rgba(239,68,68,.28);color:#fee2e2}
 @media(max-width:760px){.bg-total-figures{text-align:left}.bg-total-meta{justify-content:flex-start}.bg-total-count{font-size:36px}}
+/* Source Google Sheets hold customer data: never show links to them on the dashboard. */
+.stage-link,#sourceLinks{display:none!important}

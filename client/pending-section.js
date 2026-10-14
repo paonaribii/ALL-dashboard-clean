@@ -22,9 +22,9 @@ function renderNoContract(){
  const order=[...stats.keys()].sort((a,b)=>pick(stats.get(b))-pick(stats.get(a))||stats.get(b).all-stats.get(a).all);
  const max=Math.max(1,...order.map(k=>pick(stats.get(k))));
  $('noContractCards').innerHTML=order.map(k=>{
-  const s=stats.get(k),v=pick(s),spec=audit.stages?.find(x=>x.stage===k),url=(links.noContract||'#')+(spec?.gid?`#gid=${spec.gid}`:'');
+  const s=stats.get(k),v=pick(s);
   // One age filter (the buttons in the header); each bar just states its count and share.
-  return `<div class="noct-stage"><div class="noct-stage-top"><span class="noct-name">${esc(NO_CONTRACT_STAGE_LABELS[k]||k)} <a class="stage-link" href="${esc(url)}" target="_blank" rel="noopener">เปิดข้อมูลต้นทาง ↗</a></span><span class="noct-val">จำนวน ${fmt(v)} บิล คิดเป็น ${shown?pctText(v,shown):'0%'}</span></div>`+
+  return `<div class="noct-stage"><div class="noct-stage-top"><span class="noct-name">${esc(NO_CONTRACT_STAGE_LABELS[k]||k)}</span><span class="noct-val">จำนวน ${fmt(v)} บิล คิดเป็น ${shown?pctText(v,shown):'0%'}</span></div>`+
    `<div class="noct-track" role="img" aria-label="${esc(NO_CONTRACT_STAGE_LABELS[k]||k)} ${fmt(v)} บิล"><span style="width:${v/max*100}%"></span></div></div>`;
  }).join('');
  // Click an age bucket to show only that range; click it again (or ทั้งหมด) for everything.

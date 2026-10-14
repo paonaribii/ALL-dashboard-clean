@@ -353,14 +353,9 @@ payload.quality = Object.fromEntries(payload.qualityRows.slice(1).map(row => [ro
 // RM-level pending-bill counts, extracted from a downloaded copy of "ค้าง Bill Auto Fix" (Summary AM RM tab) —
 // this workbook is not a live-synced source, so re-export/rebuild this file by hand when it needs refreshing.
 payload.billingIssues = JSON.parse(await readFile(new URL('billing-issues.json', dataDir), 'utf8'));
-// Google Sheet links shown behind the login. The sheet ids live in .env (not in the repo): those sheets
-// hold customer names / phone numbers and are readable by anyone with the link.
-const sheetUrl = id => id ? `https://docs.google.com/spreadsheets/d/${id}/edit` : undefined;
-payload.sourceLinks = {
-  audit: sheetUrl(process.env.SHEET_AUDIT_ID),
-  noContract: sheetUrl(process.env.SHEET_PENDING_ID),
-  data: sheetUrl(process.env.SHEET_DATA_ID),
-  billing: sheetUrl(process.env.SHEET_BILLING_ID)
-};
+// No links to the source Google Sheets are sent to the page: those sheets hold customer names / phone
+// numbers, so dashboard viewers must not be able to open them directly (the link elements are hidden in
+// client/source-links.css).
+payload.sourceLinks = {};
 await writeFile(new URL('dashboard.json.gz', dataDir), gzipSync(JSON.stringify(payload), {level: 9}));
 console.log(JSON.stringify({htmlBytes: Buffer.byteLength(html), rows: payload.contractRows.length, refreshedAt: payload.refreshedAt}));

@@ -49,6 +49,8 @@
 - ข้อมูลจริง ไฟล์ Excel และรหัสผ่านทั้งหมดไม่ถูกอัปขึ้น git
 - ทุกหน้าต้องใส่รหัสผ่านก่อน และการ login ทำตามแนวทางความปลอดภัยมาตรฐาน
   (คุกกี้ที่ปลอมไม่ได้และหมดอายุเอง, ป้องกันการฝังหน้าเว็บในเว็บอื่น ฯลฯ)
+- Google Sheets ต้นทางตั้งเป็น "จำกัด" ได้ โปรแกรมอ่านชีทผ่านบัญชีของโปรแกรมเอง (service account)
+  และหน้า Dashboard ไม่มีลิงก์ไปที่ชีท คนที่ดู Dashboard จึงเปิดชีทที่มีข้อมูลลูกค้าตรงๆ ไม่ได้
 
 ---
 
@@ -65,6 +67,8 @@ Python (นำเข้า Excel) · Vercel หรือ Cloudflare Pages + KV �
 ```bash
 npm install
 cp .env.example .env        # ตั้ง DASHBOARD_PASSWORD (8+ ตัว), SESSION_SECRET (32+ ตัว), Sheet ID
+# วางไฟล์ key ของ service account ไว้ที่ credentials/service_account.json
+# แล้วแชร์ชีทต้นทางให้ email ของ service account เป็นผู้มีสิทธิ์อ่าน
 # วางไฟล์ data/contracts.db (ไม่อยู่ใน git เพราะเป็นข้อมูลจริง)
 npm run build:data          # คำนวณข้อมูลและสร้างหน้าเว็บ
 npm start                   # เปิดที่ http://127.0.0.1:4191
