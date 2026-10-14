@@ -7,7 +7,7 @@ import {createInterface} from 'node:readline/promises';
 import {fileURLToPath} from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const PROJECT = 'ufund-dashboard';
+const PROJECT = process.env.CLOUDFLARE_PROJECT || 'executive-dashboard';
 const TOML = `${ROOT}wrangler.toml`;
 const STATE = `${ROOT}.cloudflare-deploy.json`;
 const DATA = 'data/dashboard.json.gz';
@@ -76,4 +76,4 @@ if (!state.secretsSet || process.argv.includes('--set-password')) {
 
 console.log('5/5 Deploy');
 wrangler(['pages', 'deploy', 'public', '--project-name', PROJECT, '--branch', 'main', '--commit-dirty=true']);
-console.log('\n✓ เสร็จแล้ว ลิงก์หลัก: https://ufund-dashboard.pages.dev (ถ้าชื่อซ้ำ Cloudflare จะแสดงลิงก์จริงด้านบน)');
+console.log(`\n✓ เสร็จแล้ว ลิงก์หลัก: https://${PROJECT}.pages.dev (ถ้าชื่อซ้ำ Cloudflare จะแสดงลิงก์จริงด้านบน)`);
