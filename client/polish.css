@@ -1,0 +1,57 @@
+/* Readability + motion layer, injected last so it wins over the older theme layers. Font: Sarabun (looped Thai).
+   Typography: one Thai-first family, taller Thai line height, tabular numbers, darker secondary text.
+   Motion: short, purposeful transitions only; all of it is switched off for prefers-reduced-motion. */
+:root{--font-th:"Sarabun","Noto Sans Thai","Leelawadee UI","Sukhumvit Set",system-ui,sans-serif;--muted:#5f6f86;--ease:cubic-bezier(.2,.7,.2,1)}
+body{font-family:var(--font-th)!important;font-size:14.5px;line-height:1.6;font-variant-numeric:tabular-nums;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit!important}
+h1,h2,h3,h4{line-height:1.3;letter-spacing:0}
+th{letter-spacing:0;line-height:1.4}
+td{line-height:1.45}
+.muted,.note,.ins-note,.od-chart header p,.ins-card header p{color:var(--muted)}
+
+/* Hero cards: big number first, label and money as calm secondary lines */
+.card .kicker{font-size:13.5px;font-weight:600;color:#3f5470}
+.card .count{font-weight:700;letter-spacing:-.01em}
+.card .money{font-size:12.5px;color:var(--muted)}
+
+/* Hover / press feedback on anything clickable */
+.card.clickable,.mix-card,.status-card,.executive-mdm-legend button,.noct-chip,.noct-age-btn,.metric-link,.btn,.tab,[data-tab]{transition:transform .18s var(--ease),box-shadow .18s var(--ease),background-color .18s,border-color .18s,color .18s}
+.card.clickable:hover,.mix-card.clickable:hover,.status-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(20,43,80,.10)}
+.card.clickable:active,.mix-card.clickable:active,.status-card:active{transform:translateY(0) scale(.99)}
+.executive-mdm-legend button:hover{background:#f3f7fd}
+:focus-visible{outline:2px solid #2563eb;outline-offset:2px;border-radius:6px}
+
+/* Table rows: gentle highlight while scanning */
+tbody tr{transition:background-color .15s}
+tbody tr:hover{background:#f5f8fd}
+
+/* Sections fade up when their tab opens */
+@keyframes ufund-fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.tab-section:not([hidden]){animation:ufund-fade-up .32s var(--ease) both}
+
+/* Charts grow in when drawn */
+@keyframes ufund-grow-y{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes ufund-grow-x{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.od-bar{transform-box:fill-box;transform-origin:50% 100%;animation:ufund-grow-y .55s var(--ease) both}
+.ins-card svg path{transform-box:fill-box;transform-origin:0 50%;animation:ufund-grow-x .55s var(--ease) both}
+.noct-track span,.executive-track span{transform-origin:0 50%;animation:ufund-grow-x .55s var(--ease) both}
+@keyframes ufund-pop{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+.ins-dot{transform-box:fill-box;transform-origin:center;animation:ufund-pop .45s var(--ease) both}
+
+/* A number that just changed after a filter briefly glows */
+@keyframes ufund-flash{0%{background:rgba(37,99,235,.14)}100%{background:transparent}}
+.ufund-changed{animation:ufund-flash .9s ease-out;border-radius:6px}
+
+body.dark{--muted:#a3adbb}
+body.dark .card .kicker{color:#cbd5e1}
+body.dark tbody tr:hover{background:rgba(255,255,255,.04)}
+body.dark .executive-mdm-legend button:hover{background:rgba(255,255,255,.05)}
+
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Date filter: START / END dropdowns and the quick-range buttons share one row (wraps when narrow) */
+.date-range.compact{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 20px}
+.date-range.compact .quick-range-buttons{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 0 auto}
+
+/* Hero row hidden on Brand & Product (it would repeat the brand / product cards) */
+#heroCards[hidden]{display:none!important}

@@ -1,0 +1,35 @@
+/* Preview only. No markup, data, text, or event-handler changes. */
+#statusCards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+#statusCards .status-line{margin:0;gap:14px;min-width:0}
+#statusCards .status-line:nth-child(-n+2){display:block;grid-column:auto}
+#statusCards .status-line:nth-child(n+3){grid-column:1/-1}
+#statusCards .status-line:nth-child(3){grid-template-columns:repeat(6,minmax(0,1fr));padding:16px;background:transparent;border:1px solid transparent;border-radius:28px}
+#statusCards .status-line:nth-child(4){grid-template-columns:repeat(5,minmax(0,1fr))}
+#statusCards .status-line:nth-child(n+5){grid-template-columns:repeat(2,minmax(0,1fr))}
+#statusCards .status-card{--status-tint:#edf2f7;--status-accent:#73859b;position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:9px;min-height:205px;height:100%;padding:21px 18px 17px;border:1px solid transparent;border-radius:24px;background:var(--status-tint);box-shadow:0 5px 18px #2c548b06;transition:transform .16s ease,box-shadow .16s ease;grid-column:auto}
+#statusCards .status-card:before,#statusCards .status-card:after{display:none}
+#statusCards .status-card .title{padding-right:17px;min-height:18px}
+#statusCards .status-card .pct{margin:0 0 9px;line-height:1.2}
+#statusCards .status-card .meta{line-height:1.5;min-height:30px;overflow-wrap:anywhere}
+#statusCards .status-card .delta{margin-top:auto;max-width:100%}
+#statusCards .status-card:hover{transform:translateY(-2px);box-shadow:0 9px 24px #1c41621a}
+#statusCards .status-card.active{outline:2px solid var(--status-accent);outline-offset:2px}
+#statusCards .status-line:nth-child(-n+2) .status-card{min-height:168px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 24px;padding:23px 26px}
+#statusCards .status-line:nth-child(-n+2) .status-card .title{grid-column:1;grid-row:1;padding-right:0}
+#statusCards .status-line:nth-child(-n+2) .status-card .pct{grid-column:2;grid-row:1/3;align-self:start;border-radius:17px;background:transparent;padding:12px 22px;margin:0}
+#statusCards .status-line:nth-child(-n+2) .status-card>div:nth-child(3){grid-column:1;grid-row:2}
+#statusCards .status-line:nth-child(-n+2) .status-card .meta{grid-column:1;grid-row:3;min-height:0}
+#statusCards .status-line:nth-child(-n+2) .status-card .delta{grid-column:2;grid-row:3;justify-self:end;align-self:end;margin:0}
+#statusCards .status-line:nth-child(-n+2) .status-card:before{inset:0;opacity:.85}
+#statusCards .status-line:nth-child(-n+2) .status-card:after{display:none}
+#statusCards .status-card[data-status="Normal"]{--status-tint:#dff2e9;--status-accent:#58a98a}
+#statusCards .status-card.od{--status-tint:#f8d8dd;--status-accent:#d98594}
+#statusCards .status-card[data-status="Sold Debt"]{--status-tint:#dcecff;--status-accent:#79a9d6}
+#statusCards .status-card[data-status="Contract Terminated"]{--status-tint:#e7dff5;--status-accent:#aa94c9}
+#statusCards .status-card[data-status="Early Closure"]{--status-tint:#d9eee5;--status-accent:#7cb7a4}
+#statusCards .status-card[data-status="Closed Account"]{--status-tint:#e5def4;--status-accent:#aa94c9}
+#statusCards .status-card[data-status="Write Off"]{--status-tint:#f8e3d1;--status-accent:#d5a185}
+#statusCards .status-card[data-status="New / Not Yet Due"]{--status-tint:#e6f3fc;--status-accent:#82b5d9}
+@media(max-width:1250px){#statusCards .status-line:nth-child(3){grid-template-columns:repeat(3,minmax(0,1fr))}#statusCards .status-line:nth-child(4){grid-template-columns:repeat(3,minmax(0,1fr))}#statusCards .status-line:nth-child(-n+2) .status-card .delta{grid-column:1/-1;grid-row:4;justify-self:start}}
+@media(max-width:760px){#statusCards{grid-template-columns:1fr;gap:14px}#statusCards .status-line:nth-child(-n+2){grid-column:1}#statusCards .status-line:nth-child(3),#statusCards .status-line:nth-child(4){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#statusCards .status-line:nth-child(3){padding:10px;border-radius:24px}#statusCards .status-card{padding:18px 12px 15px;border-radius:20px}#statusCards .status-card:after{right:12px}#statusCards .status-card .delta{font-size:10px}#statusCards .status-line:nth-child(-n+2) .status-card{padding:20px}#statusCards .status-line:nth-child(-n+2) .status-card .pct{padding:10px 16px}}
+@media(prefers-reduced-motion:reduce){#statusCards .status-card{transition:none}}

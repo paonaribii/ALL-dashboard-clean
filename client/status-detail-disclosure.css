@@ -1,0 +1,16 @@
+#statusDetailDisclosure{border:1px solid #e1ebf7;border-radius:18px;background:#fff;overflow:hidden}
+#statusDetailDisclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;list-style:none;padding:18px 22px;cursor:pointer;color:#19395e}
+#statusDetailDisclosure>summary::-webkit-details-marker{display:none}
+#statusDetailDisclosure>summary:focus-visible{outline:3px solid #8dc0ff;outline-offset:-4px;border-radius:16px}
+#statusDetailDisclosure>summary:hover{background:#f7fbff}
+.status-detail-heading{font-size:18px;font-weight:750}
+.status-detail-action{display:flex;align-items:center;gap:10px;color:#1684ff;font-size:13px;font-weight:650}
+.status-detail-chevron{font-size:22px;line-height:1;transition:transform .15s ease}
+#statusDetailDisclosure .when-open{display:none}
+#statusDetailDisclosure[open] .when-open{display:inline}
+#statusDetailDisclosure[open] .when-closed{display:none}
+#statusDetailDisclosure[open] .status-detail-chevron{transform:rotate(180deg)}
+#statusDetailDisclosure[open]>summary{border-bottom:1px solid #e8eff8}
+#statusDetailDisclosure>.panel{border:0;border-radius:0;box-shadow:none;margin:0}
+@media(max-width:600px){#statusDetailDisclosure>summary{padding:15px;gap:10px}.status-detail-heading{font-size:16px}.status-detail-action{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.status-detail-chevron{transition:none}}

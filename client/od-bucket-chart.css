@@ -1,0 +1,83 @@
+#statusCards.od-chart-mode{display:block}
+.od-chart{--od-surface:#ffffff;--od-ink:#0b0b0b;--od-ink-2:#52514e;--od-muted:#8a8f98;--od-grid:#e8ecf1;--od-line:#e6ebf2;--od-s1:#2a78d6;--od-s2:#eb6834;--od-s3:#1baf7a;position:relative;background:var(--od-surface);border:1px solid var(--od-line);border-radius:20px;padding:20px 22px 14px;box-shadow:0 5px 18px #2c548b0a}
+.od-chart header h3{margin:0;font-size:16px;color:var(--od-ink)}
+.od-chart header p{margin:4px 0 0;font-size:12.5px;line-height:1.5;color:var(--od-ink-2)}
+.od-chart-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:16px}
+.od-panel{margin:0;min-width:0}
+.od-panel figcaption{font-size:12.5px;font-weight:700;color:var(--od-ink-2);margin:0 0 2px}
+.od-panel svg{display:block;width:100%;height:auto;overflow:visible}
+.od-grid line{stroke:var(--od-grid);stroke-width:1}
+.od-axis text{fill:var(--od-muted);font-size:9.5px}
+.od-xlab{fill:var(--od-ink-2);font-size:10.5px;font-weight:600}
+.od-val{fill:var(--od-ink-2);font-size:10px;font-weight:700}
+.od-bar,.od-val{transition:opacity .15s}
+.od-dim{opacity:.28}
+.od-bar.is-hover{filter:brightness(.86)}
+.od-hit{fill:transparent;cursor:pointer;outline:none}
+.od-hit:focus-visible{stroke:var(--od-s1);stroke-width:1.5}
+.od-chart-tip{position:absolute;z-index:5;pointer-events:none;background:var(--od-surface);border:1px solid var(--od-line);border-radius:10px;box-shadow:0 8px 24px #0f172a1f;padding:9px 12px;font-size:12px;line-height:1.7;color:var(--od-ink);min-width:200px}
+.od-chart-tip .sw{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+/* "ดูเป็นตาราง" tables. Overrides the site-wide table{min-width:920px} and sticky/nowrap th so they fit their card. */
+.od-table,.ins-table{margin-top:8px;max-width:100%;overflow-x:auto}
+.od-table summary,.ins-table summary{cursor:pointer;color:var(--od-ink-2,#52514e);font-size:12px}
+.od-table table,.ins-table table{min-width:0!important;width:100%;table-layout:auto;margin-top:6px;border-collapse:collapse;font-size:11.5px}
+.od-table th,.ins-table th,.od-table td,.ins-table td{position:static;height:auto;padding:5px 6px;border-bottom:1px solid var(--od-grid,#e8ecf1);white-space:normal;font-size:11.5px;line-height:1.35;background:transparent;text-align:left;color:var(--od-ink,#0b0b0b)}
+.od-table th,.ins-table th{color:var(--od-ink-2,#52514e);font-weight:700;border-bottom-color:var(--od-line,#e6ebf2)}
+.od-table .num,.ins-table .num{text-align:right;white-space:nowrap}
+.ins-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;align-items:stretch}
+.ins-card{--ins-good:#1baf7a;--ins-warn:#eda100;--ins-bad:#d03b3b;--ins-none:#c3cad4;--ins-dot:#2a78d6;position:relative;background:var(--od-surface,#fff);border:1px solid var(--od-line,#e6ebf2);border-radius:20px;padding:20px 22px 14px;box-shadow:0 5px 18px #2c548b0a;min-width:0}
+.ins-card header h3{margin:0;font-size:16px;color:var(--od-ink,#0b0b0b)}
+.ins-card header p{margin:4px 0 0;font-size:12.5px;line-height:1.5;color:var(--od-ink-2,#52514e)}
+.ins-card svg{display:block;width:100%;height:auto;margin-top:10px;overflow:visible}
+.ins-grid line{stroke:var(--od-grid,#e8ecf1);stroke-width:1}
+.ins-grid text,.ins-axis{fill:var(--od-muted,#8a8f98);font-size:10px}
+.ins-rowlab{fill:var(--od-ink-2,#52514e);font-size:12px;font-weight:600}
+.ins-seglab{fill:#fff;font-size:11px;font-weight:700}
+.ins-seglab.dark{fill:#3b2a00}
+.ins-hit{fill:transparent}
+.ins-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:12px;color:var(--od-ink-2,#52514e)}
+.ins-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ins-avg{stroke:var(--od-muted,#8a8f98);stroke-width:1;stroke-dasharray:4 4}
+.ins-avglab{fill:var(--od-muted,#8a8f98);font-size:10px}
+.ins-dot{fill:var(--ins-dot);fill-opacity:.55;stroke:var(--od-surface,#fff);stroke-width:2;cursor:default}
+.ins-dot.risk{fill:var(--ins-bad);fill-opacity:.72}
+.ins-dot.is-hover{fill-opacity:.95}
+.ins-dotlab{fill:var(--od-ink,#0b0b0b);font-size:10.5px;font-weight:700;paint-order:stroke;stroke:var(--od-surface,#fff);stroke-width:3px;stroke-linejoin:round;pointer-events:none}
+.ins-riskkey{color:var(--ins-bad)}
+.ins-tip{position:absolute;z-index:5;pointer-events:none;background:var(--od-surface,#fff);border:1px solid var(--od-line,#e6ebf2);border-radius:10px;box-shadow:0 8px 24px #0f172a1f;padding:9px 12px;font-size:12px;line-height:1.7;color:var(--od-ink,#0b0b0b);min-width:190px}
+.ins-tip .sw{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+@media(max-width:1100px){.ins-row{grid-template-columns:1fr}}
+@media(max-width:900px){.od-chart-grid{grid-template-columns:1fr;gap:14px}.od-chart{padding:16px}}
+#statusCards.od-chart-mode{--od-surface:#ffffff;--od-ink:#0b0b0b;--od-ink-2:#52514e;--od-muted:#8a8f98;--od-grid:#e8ecf1;--od-line:#e6ebf2}
+body.dark #statusCards.od-chart-mode{--od-surface:#1a1a19;--od-ink:#ffffff;--od-ink-2:#c3c2b7;--od-muted:#9a998f;--od-grid:#2c2c2a;--od-line:#33332f}
+body.dark .ins-card{--ins-good:#199e70;--ins-warn:#c98500;--ins-bad:#d03b3b;--ins-none:#8a8f98;--ins-dot:#3987e5}
+body.dark .od-chart{--od-surface:#1a1a19;--od-ink:#ffffff;--od-ink-2:#c3c2b7;--od-muted:#9a998f;--od-grid:#2c2c2a;--od-line:#33332f;--od-s1:#3987e5;--od-s2:#d95926;--od-s3:#199e70}
+.ins-note{margin:6px 0 0;font-size:11px;color:var(--od-muted,#8a8f98)}
+/* AM risk table heat cells: warm sequential ramp (light -> dark), text keeps the normal ink */
+.ins-table td.heat{padding-top:3px;padding-bottom:3px}
+.heat-cell{display:inline-block;min-width:58px;padding:3px 8px;border-radius:6px;text-align:right;font-variant-numeric:tabular-nums}
+.heat-cell.h0{background:#f1f3f6}
+.heat-cell.h1{background:#fbe9c6}
+.heat-cell.h2{background:#f8d29a}
+.heat-cell.h3{background:#f3ad8f}
+.heat-cell.h4{background:#e9877e;color:#3a0d0a;font-weight:700}
+.heat-key .heat-cell{min-width:0;margin-left:4px;padding:1px 8px;font-size:10.5px;vertical-align:1px}
+.heat-key .heat-cell:empty{width:18px}
+body.dark .heat-cell.h0{background:#2a2c31}
+body.dark .heat-cell.h1{background:#4a3f25}
+body.dark .heat-cell.h2{background:#5e4524}
+body.dark .heat-cell.h3{background:#6e3b2f}
+body.dark .heat-cell.h4{background:#8a3a3a;color:#fff}
+/* Insight cards on the Brand & Product / AM Summary tabs: chart left, table right; stacked when narrow */
+.ins-card{--od-surface:#ffffff;--od-ink:#0b0b0b;--od-ink-2:#52514e;--od-muted:#8a8f98;--od-grid:#e8ecf1;--od-line:#e6ebf2}
+body.dark .ins-card{--od-surface:#1a1a19;--od-ink:#ffffff;--od-ink-2:#c3c2b7;--od-muted:#9a998f;--od-grid:#2c2c2a;--od-line:#33332f}
+.ins-split{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:28px;align-items:stretch;margin-top:18px}
+.ins-split>.ins-body{min-width:0}
+/* Table panel stretches to the chart's height and its rows spread to fill it */
+.ins-table-panel{display:flex;flex-direction:column;min-width:0;margin-top:0}
+.ins-table-panel h4{margin:0 0 8px;font-size:16px;color:var(--od-ink)}
+.ins-table-panel table{flex:1 1 auto;margin-top:0}
+@media(max-width:1100px){.ins-split{grid-template-columns:minmax(0,1fr)}.ins-table-panel{margin-top:16px}}
+/* MDM Gap sits inside the Brand & Product panel, above the "รายละเอียดสินค้า" / Brand table */
+#mdmGapCard{margin:18px 0}
+#amRiskCard{margin:0 0 18px}

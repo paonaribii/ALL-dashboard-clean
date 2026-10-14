@@ -1,0 +1,29 @@
+# --- Secrets: passwords, session key, Google Sheet ids, Vercel token ---
+.env
+.env.*
+!.env.example
+
+# --- Data (PDPA): contract-level database, dashboard payloads, sheet extracts, page snapshots ---
+# Everything under data/ is built locally from the raw contract exports; none of it goes to git.
+data/*
+!data/.gitkeep
+*.db
+*.db-*
+*.sqlite
+*.json.gz
+*.xlsx
+*.xlsm
+*.csv
+
+# --- Generated page (rebuilt by `npm run build`) ---
+public/index.html
+
+# --- Tool / machine state ---
+node_modules/
+.vercel/
+.wrangler/
+.cloudflare-deploy.json
+.claude/
+*.log
+.DS_Store
+Thumbs.db

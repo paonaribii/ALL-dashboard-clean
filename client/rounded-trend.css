@@ -1,0 +1,23 @@
+/* Presentation only: bar heights and all values retain the existing period calculation. */
+#yearTrend .timeline-chart{height:390px;gap:22px;padding:25px 18px 0;background:repeating-linear-gradient(to top,transparent 0,transparent 79px,#eef2f7 80px,#eef2f7 81px);border-bottom:1px solid #e4ebf4}
+#yearTrend .time-col{min-width:112px;max-width:none;align-items:center;outline:none}
+#yearTrend .time-stack{width:80px;min-width:80px;max-width:80px;flex-shrink:0;border-radius:12px 12px 3px 3px;overflow:hidden;background:transparent}
+#yearTrend .time-seg{flex-shrink:0;min-height:0;overflow:hidden}
+#yearTrend .time-seg.active{background:#3197ff!important;color:#082646}
+#yearTrend .time-seg.closed{background:#d4dce7!important;color:#304663}
+#yearTrend .trend-number-label{display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.15;font-variant-numeric:tabular-nums;white-space:nowrap}
+#yearTrend .trend-number-label small{font-size:11px;font-weight:600}
+#yearTrend .trend-number-label strong{font-size:13px;font-weight:800}
+#yearTrend .time-value{display:flex;justify-content:center;gap:14px;width:100%;margin-bottom:9px;min-height:0}
+#yearTrend .time-value:empty{display:none}
+#yearTrend .time-value .active{color:#1374cf}
+#yearTrend .time-value .closed{color:#64748b}
+#yearTrend .time-value .trend-number-label small:before{content:'';display:inline-block;width:6px;height:6px;border-radius:2px;background:#3197ff;margin-right:4px;vertical-align:1px}
+#yearTrend .time-value .closed small:before{background:#a4b1c3}
+#yearTrend .time-label{font-size:13px;margin-top:8px;padding:8px 0 9px}
+#yearTrend .time-col:hover .time-stack,#yearTrend .time-col.selected .time-stack,#yearTrend .time-col:focus-visible .time-stack{box-shadow:0 0 0 3px #deedff;filter:none}
+#yearTrend .time-col:focus-visible .time-label{outline:2px solid #3197ff;border-radius:5px}
+#yearTrend .trend-legend{gap:23px;padding-top:17px}
+#yearTrend .trend-legend span:last-child:before{background:#d4dce7}
+body.dark #yearTrend .timeline-chart{background:none;border-color:#304765}
+@media(max-width:760px){#yearTrend .timeline-chart{gap:16px;padding-left:8px;padding-right:8px}#yearTrend .time-col{min-width:112px}#yearTrend .time-stack{width:76px;min-width:76px;max-width:76px}}

@@ -1,0 +1,11 @@
+# Build-time only — the deployed site (api/*.mjs) only reads data/dashboard.json.gz at runtime and
+# has no npm dependencies of its own, so none of this needs to be uploaded to Vercel.
+data/contracts.db
+data/reviewed-payload-patch.json.gz
+node_modules
+scripts
+client
+test
+data/.index.generated.html
+data/index.manual-edits-*.html
+source

@@ -1,0 +1,16 @@
+/* Let long labels wrap at words and cards grow; never clip or truncate values. */
+.product-card,.product-card-top,.product-name,.product-meta,.bar-row>strong{min-width:0}
+.product-card-top{align-items:flex-start;gap:10px}
+.product-card .product-name{flex:1;white-space:normal;word-break:normal;overflow-wrap:anywhere;line-height:1.5}
+.product-card .product-icon{flex-shrink:0}
+.product-card .product-meta{white-space:normal;overflow-wrap:anywhere;line-height:1.6}
+#statusCards .status-card .title{max-width:100%;padding-right:0;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+#statusCards .status-card .delta,.executive-main .card .delta{white-space:normal;overflow-wrap:anywhere;line-height:1.5;min-width:0;max-width:100%}
+.bar-row>strong{white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+#mdmByStatus{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+#mdmByStatus .mini-top{gap:12px;min-width:0}
+#mdmByStatus .mini-top strong:first-child{flex-shrink:1;min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+#mdmByStatus .mini-top strong:last-child{white-space:nowrap}
+.mdm-status-popover header>div{min-width:0}
+.mdm-status-popover header strong{white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+.mdm-status-popover button{flex-shrink:0}

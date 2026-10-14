@@ -1,0 +1,8 @@
+name = "ufund-dashboard"
+pages_build_output_dir = "public"
+compatibility_date = "2025-06-01"
+
+[[kv_namespaces]]
+binding = "UFUND_DATA"
+# ว่างไว้ได้ — npm run deploy:cloudflare จะสร้าง KV namespace แล้วเติม id ให้เอง
+id = ""

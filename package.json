@@ -1,0 +1,19 @@
+{
+  "name": "ufund-executive-dashboard",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "build": "npm run fetch:sheets && node --env-file-if-exists=.env scripts/port-dashboard.mjs",
+    "build:data": "npm run fetch:sheets && node scripts/build-reviewed-data.mjs && node --env-file-if-exists=.env scripts/port-dashboard.mjs --data data/reviewed-payload-patch.json.gz",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "deploy:cloudflare": "node --env-file-if-exists=.env scripts/deploy-cloudflare.mjs",
+    "fetch:sheets": "node --env-file-if-exists=.env scripts/fetch-billing.mjs && node --env-file-if-exists=.env scripts/fetch-pending.mjs"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "better-sqlite3": "^13.0.3"
+  }
+}
